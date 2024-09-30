@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-interface Sudent {
+interface Student {
   name: string;
   hasReviewed: boolean;
 }
@@ -12,7 +12,7 @@ interface Sudent {
   styleUrl: './pickviewer.component.scss',
 })
 export class PickviewerComponent {
-  private students: Sudent[] = [
+  private students: Student[] = [
     { name: 'Alice', hasReviewed: false },
     { name: 'Bob', hasReviewed: false },
     { name: 'Charlie', hasReviewed: false },
@@ -27,7 +27,7 @@ export class PickviewerComponent {
     });
   }
 
-  public getStudentByName(name: string): Sudent | undefined {
+  public getStudentByName(name: string): Student | undefined {
     return this.students.find((student) => student.name === name);
   }
 

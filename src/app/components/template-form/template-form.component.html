@@ -68,7 +68,7 @@
     <!-- gestion erreur email -->
     @if (email.errors && (email.dirty || email.touched || contactForm.submitted) && submitted)
     { @if(email.errors['required']) {<span class="message error"
-      >l'adresse mail est requis</span
+      >l'adresse mail est requise</span
     >} @if(email.errors['email']) {<span class="message error"
       >Veuillez entrer un email valide</span
     >} }

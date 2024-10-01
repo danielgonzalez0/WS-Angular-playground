@@ -1,4 +1,10 @@
-<form class="form-container" autocomplete="false" (ngSubmit)="onSubmit()" (reset)="onReset()">
+<form
+  class="form-container"
+  #contactForm="ngForm"
+  autocomplete="false"
+  (ngSubmit)="onSubmit(contactForm)"
+  (reset)="onReset(contactForm)"
+>
   <h2 id="form-title">Formulaire de Contact</h2>
   <fieldset id="firstname-field">
     <label for="lastname">Nom</label>
@@ -11,8 +17,17 @@
       placeholder="ex: John"
       autocomplete="false"
       [(ngModel)]="message.lastname"
+      #lastname="ngModel"
     />
-    <span class="message error">error message</span>
+    <!-- gestion erreur lastname -->
+    @if (lastname.errors && (lastname.dirty || lastname.touched ||
+    contactForm.submitted) && submitted) { @if(lastname.errors['required']) {<span
+      class="message error"
+      >le nom est requis</span
+    >} @if(lastname.errors['minlength']) {<span class="message error"
+      >le nom doit contenir au moins 2 caractères</span
+    >} }
+    <!-- fin gestion erreur lastname -->
   </fieldset>
   <fieldset id="lastname-field">
     <label for="firstname">Prénom</label>
@@ -25,8 +40,17 @@
       placeholder="ex: Doe"
       autocomplete="false"
       [(ngModel)]="message.firstname"
+      #firstname="ngModel"
     />
-    <span class="message error">error message</span>
+    <!-- gestion erreur firstname -->
+    @if (firstname.errors && (firstname.dirty || firstname.touched ||
+    contactForm.submitted) && submitted) { @if(firstname.errors['required']) {<span
+      class="message error"
+      >le prénom est requis</span
+    >} @if(firstname.errors['minlength']) {<span class="message error"
+      >le prénom doit contenir au moins 2 caractères</span
+    >} }
+    <!-- fin gestion erreur firstname -->
   </fieldset>
   <fieldset id="email-field">
     <label for="email">Contact</label>
@@ -39,8 +63,16 @@
       placeholder="ex: john.doe@mail.com"
       autocomplete="false"
       [(ngModel)]="message.email"
+      #email="ngModel"
     />
-    <span class="message error">error message</span>
+    <!-- gestion erreur email -->
+    @if (email.errors && (email.dirty || email.touched || contactForm.submitted) && submitted)
+    { @if(email.errors['required']) {<span class="message error"
+      >l'adresse mail est requis</span
+    >} @if(email.errors['email']) {<span class="message error"
+      >Veuillez entrer un email valide</span
+    >} }
+    <!-- fin gestion erreur email -->
   </fieldset>
   <fieldset id="content-field">
     <label for="content">Contenu du message</label>
@@ -48,14 +80,30 @@
       id="content"
       name="content"
       required
+      minlength="20"
       placeholder="Saisir commentaire"
       autocomplete="false"
       [(ngModel)]="message.content"
+      #content="ngModel"
     ></textarea>
-    <span class="message">error message</span>
+    <!-- gestion erreur content -->
+    @if (content.errors && (content.dirty || content.touched ||
+    contactForm.submitted) && submitted) { @if(content.errors['required']) {<span
+      class="message error"
+      >le contenu du message est requis</span
+    >} @if(content.errors['minlength']) {<span class="message error"
+      >le message doit contenir au moins 20 caractères</span
+    >} }
+    <!-- fin gestion erreur content -->
   </fieldset>
 
   <button type="reset" id="reset" class="btn">Restaurer</button>
   <button type="submit" id="submit" class="btn">Envoyer</button>
 </form>
-<p class="message">formulaire soumis</p>
+@if(formSubmittedWithSuccess) {
+  <p class="message">formulaire soumis</p>
+}
+@if(submitted && !formSubmittedWithSuccess) {
+  <p class="message error">Veuillez corriger les champs requis</p>
+}
+

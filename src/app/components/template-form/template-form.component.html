@@ -1,4 +1,4 @@
-<form class="form-container" autocomplete="false">
+<form class="form-container" autocomplete="false" (ngSubmit)="onSubmit()" (reset)="onReset()">
   <h2 id="form-title">Formulaire de Contact</h2>
   <fieldset id="firstname-field">
     <label for="lastname">Nom</label>
@@ -10,6 +10,7 @@
       minlength="2"
       placeholder="ex: John"
       autocomplete="false"
+      [(ngModel)]="message.lastname"
     />
     <span class="message error">error message</span>
   </fieldset>
@@ -23,6 +24,7 @@
       minlength="2"
       placeholder="ex: Doe"
       autocomplete="false"
+      [(ngModel)]="message.firstname"
     />
     <span class="message error">error message</span>
   </fieldset>
@@ -36,6 +38,7 @@
       email
       placeholder="ex: john.doe@mail.com"
       autocomplete="false"
+      [(ngModel)]="message.email"
     />
     <span class="message error">error message</span>
   </fieldset>
@@ -47,6 +50,7 @@
       required
       placeholder="Saisir commentaire"
       autocomplete="false"
+      [(ngModel)]="message.content"
     ></textarea>
     <span class="message">error message</span>
   </fieldset>

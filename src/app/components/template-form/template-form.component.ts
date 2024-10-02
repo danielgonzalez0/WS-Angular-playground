@@ -35,7 +35,7 @@ export class TemplateFormComponent {
       clearTimeout(this.timeoutFn);
       this.timeoutFn = null;
     }
-    form.reset();
+    form.resetForm();
     console.log('Form reset');
   }
 

@@ -21,7 +21,7 @@
     />
     <!-- gestion erreur lastname -->
     @if (lastname.errors && (lastname.dirty || lastname.touched ||
-    contactForm.submitted) && submitted) { @if(lastname.errors['required']) {<span
+    contactForm.submitted || submitted)) { @if(lastname.errors['required']) {<span
       class="message error"
       >le nom est requis</span
     >} @if(lastname.errors['minlength']) {<span class="message error"
@@ -44,7 +44,7 @@
     />
     <!-- gestion erreur firstname -->
     @if (firstname.errors && (firstname.dirty || firstname.touched ||
-    contactForm.submitted) && submitted) { @if(firstname.errors['required']) {<span
+    contactForm.submitted || submitted)) { @if(firstname.errors['required']) {<span
       class="message error"
       >le prénom est requis</span
     >} @if(firstname.errors['minlength']) {<span class="message error"
@@ -66,7 +66,7 @@
       #email="ngModel"
     />
     <!-- gestion erreur email -->
-    @if (email.errors && (email.dirty || email.touched || contactForm.submitted) && submitted)
+    @if (email.errors && (email.dirty || email.touched || contactForm.submitted ||submitted))
     { @if(email.errors['required']) {<span class="message error"
       >l'adresse mail est requise</span
     >} @if(email.errors['email']) {<span class="message error"
@@ -88,7 +88,7 @@
     ></textarea>
     <!-- gestion erreur content -->
     @if (content.errors && (content.dirty || content.touched ||
-    contactForm.submitted) && submitted) { @if(content.errors['required']) {<span
+    contactForm.submitted ||submitted)) { @if(content.errors['required']) {<span
       class="message error"
       >le contenu du message est requis</span
     >} @if(content.errors['minlength']) {<span class="message error"

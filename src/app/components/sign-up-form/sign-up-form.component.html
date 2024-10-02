@@ -1,0 +1,91 @@
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="form-container">
+  <h2>Formulaire d'inscription</h2>
+  <fieldset>
+    <label for="username">Nom d'utilisateur</label>
+    <input
+      type="text"
+      id="username"
+      name="username"
+      placeholder="Nom d'utilisateur"
+      formControlName="username"
+    />
+    <!-- logique message d'erreur username -->
+    @if(signUpForm.get('username')?.invalid &&
+    (signUpForm.get('username')?.dirty || signUpForm.get('username')?.touched ||
+    submitted)) { @if (signUpForm.get('username')?.errors?.['required']) {
+    <span class="message error">Le nom d'utilisateur est requis.</span>
+    } @if (signUpForm.get('username')?.errors?.['minlength']) {
+    <span class="message error"
+      >Le nom doit comporter au moins 3 caractères.</span
+    >
+    } }
+    <!-- logique message d'erreur username -->
+  </fieldset>
+  <fieldset>
+    <label for="email">Email</label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      placeholder="Email"
+      formControlName="email"
+    />
+    <!-- logique message d'erreur email -->
+    @if(signUpForm.get('email')?.invalid && (signUpForm.get('email')?.dirty ||
+    signUpForm.get('email')?.touched || submitted)) { @if
+    (signUpForm.get('email')?.errors?.['required']) {
+    <span class="message error">L'adresse mail est requise.</span>
+    } @if (signUpForm.get('email')?.errors?.['email']) {
+    <span class="message error">Veuillez saisir une adresse mail valide</span>
+    } }
+    <!-- logique message d'erreur email -->
+  </fieldset>
+
+  <!-- implementation password -->
+  <div div formGroupName="passwords" class="passwords-container">
+    <fieldset>
+      <label for="password">Mot de passe</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="Saisir un mot de passe"
+      />
+      @if (signUpForm.get('passwords.password')?.invalid &&
+      (signUpForm.get('passwords.password')?.touched ||
+      signUpForm.get('passwords.password')?.dirty || submitted)) {
+      <div>
+        @if (signUpForm.get('passwords.password')?.errors?.['required']) {
+        <span class="message error">Le mot de passe est requis.</span>
+        } @else if
+        if(signUpForm.get('passwords.password')?.errors?.['securePassword']) {
+        <span class="message error"
+          >Le mot de passe doit contenir au moins 12 caractères, avec une
+          majuscule, une minuscule, un chiffre, et un caractère spécial.</span
+        >
+        }
+      </div>
+      }
+    </fieldset>
+    <fieldset>
+      <label for="confirmPassword">Confirmation mot de passe</label>
+      <input
+        type="password"
+        id="confirmPassword"
+        formControlName="confirmPassword"
+        placeholder="Confirmer le mot de passe"
+      />
+      @if (signUpForm.get('passwords')?.errors?.['passwordsMismatch'] &&
+      (signUpForm.get('passwords')?.touched ||
+      signUpForm.get('passwords')?.dirty || submitted)) {
+      <span class="message error">Les mots de passe ne correspondent pas.</span>
+      }
+    </fieldset>
+  </div>
+  <button type="submit" class="btn">S'inscrire</button>
+</form>
+@if(formSubmittedWithSuccess) {
+<p class="message">formulaire soumis</p>
+} @if(submitted && !formSubmittedWithSuccess) {
+<p class="message error">Veuillez corriger les champs requis</p>
+}

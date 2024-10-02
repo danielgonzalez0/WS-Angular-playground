@@ -88,7 +88,7 @@
     ></textarea>
     <!-- gestion erreur content -->
     @if (content.errors && (content.dirty || content.touched ||
-    contactForm.submitted ||submitted)) { @if(content.errors['required']) {<span
+    contactForm.submitted)) { @if(content.errors['required']) {<span
       class="message error"
       >le contenu du message est requis</span
     >} @if(content.errors['minlength']) {<span class="message error"
@@ -103,7 +103,7 @@
 @if(formSubmittedWithSuccess) {
   <p class="message">formulaire soumis</p>
 }
-@if(submitted && !formSubmittedWithSuccess) {
+@if(contactForm.submitted && !formSubmittedWithSuccess) {
   <p class="message error">Veuillez corriger les champs requis</p>
 }
 

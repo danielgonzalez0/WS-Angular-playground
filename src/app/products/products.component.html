@@ -1,0 +1,20 @@
+<p>produits</p>
+<ul>
+  @for(product of products; track product.id){
+  <li>{{ product.name }} rating = {{ product.rating }}</li>
+  }
+</ul>
+
+<p>produits triés</p>
+<ul>
+  @for(product of sortedProducts; track product.id){
+  <li>{{ product.name }} rating = {{ product.rating }}</li>
+  }
+</ul>
+
+<p>produits électriques</p>
+<ul>
+  @for(product of filterProducts; track product.id){
+  <li>{{ product.name }} rating = {{ product.rating }}</li>
+  }
+</ul>

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { PickviewerComponent } from "./pickviewer/pickviewer.component";
+import { ProductsComponent } from "./products/products.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, PickviewerComponent],
+  imports: [ProductsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
